@@ -102,7 +102,6 @@ const { getCompletions } = await import('./completion.js');
 const { runCli } = await import('./cli.js');
 const { emitHook } = await import('./hooks.js');
 const { installNodeNetwork } = await import('./node-network.js');
-const { registerUpdateNoticeOnExit, checkForUpdateBackground } = await import('./update-check.js');
 
 installNodeNetwork();
 
@@ -127,10 +126,6 @@ if (skipUserDiscovery) {
   await discoverPlugins();
 }
 
-// Register exit hook: notice appears after command output (same as npm/gh/yarn)
-registerUpdateNoticeOnExit();
-// Kick off background fetch for next run (non-blocking)
-checkForUpdateBackground();
 
 // ── Fallback completion: manifest unavailable, use full registry ─────────
 if (getCompIdx !== -1) {
